@@ -1,0 +1,205 @@
+Object-Oriented Analysis and Design
+Created by Yuecheng Luo
+Date:11/29/2025
+
+Analysis:
+
+    Domains:
+
+        Boat Management
+
+            Sailing boats and boats owned by a sailing club. Make sure that each boat has its own information.
+
+        Control
+
+            To make sure total spending on a boat must not exceed its original purchase price.
+
+        Persistent Storage
+
+            Being able to store info and after running, updated fleet data is saved in serialized form into FleetData.db and reloaded on later runs.
+
+        User Interaction
+
+            Menu that user can choose actions to view, add, remove boats and request expenses.
+
+
+    Function points:
+
+        Initialize Fleet Data
+
+            Read fleet data from a CSV file or read a serialized fleet from FleetData.db.
+
+        Print Boat Inventory
+
+            Display each boat’s:
+
+                Type
+
+                Name
+
+                Year
+
+                Make/model
+
+                Length in feet
+
+                Purchase price
+
+                Total expenses so far
+
+            Display overall totals.
+
+        Add a Boat
+
+            Prompt user for a CSV-style line.
+
+            Parse the line into a Boat object and add the new boat to the list.
+
+        Remove a Boat
+
+            Ask for a boat name. Then search the fleet; if found, remove that boat.
+
+        Request Expense on a Boat
+
+            Ask for boat name then ask for expense amount.
+
+            Check if currentExpenses + amount <= purchasePrice.
+
+            If allowed, add to expenses, show updated total spent. Otherwise, reject and show the remaining amount that could be spent.
+
+        Exit & Save
+
+            When the user chooses exit:
+
+                Serialize the current fleet to FleetData.db.
+
+        Terminate the program
+
+
+    Scenarios:
+
+        Initial CSV Run
+
+            User runs program with FleetData.csv.
+
+            Program parses each line into Boat objects and stores them in an ArrayList.
+
+            User uses menu to print, add, remove, and request expenses.
+
+            On exit, program serializes the fleet to FleetData.db.
+
+        Normal Run
+
+            Program loads ArrayList<Boat> from FleetData.db.
+
+            User prints inventory and sees prior expense history.
+
+            User requests new expenses on existing boats, staying within policy limits.
+
+            On exit, updated expenses are stored back into FleetData.db.
+
+        Add and Remove Boat Flow
+
+            User prints the fleet to see current boats.
+
+            User adds a new boat using a CSV-style line.
+
+            New boat appears in subsequent “Print” operations.
+
+            User removes a boat by giving its name in any case.
+
+            Removed boat no longer appears in the fleet report.
+
+        Expense Authorization Scenario
+
+            User chooses Expense and enters boat name: Moon Glow.
+
+            Program finds the boat; user enters an amount.
+
+            If within the remaining allowance, the program authorizes and updates expenses.
+
+            Later, if user tries to spend more than allowed, program rejects and indicates how much is left.
+
+
+Design:
+
+    Classes:
+
+        Boat：represents a single boat in the fleet
+
+        BoatType: representing the type of boat
+
+        FleetManagementSystem: main
+
+    Data:
+
+        Boat
+
+            Type of boat.
+
+            Name for the boat.
+
+            Year of manufacture.
+
+            Boat’s make and model description.
+
+            Length in feet.
+
+            Original purchase price.
+
+            Accumulated maintenance expenses to date.
+
+        BoatType
+
+            Constants:
+
+                SAILING
+
+                POWER
+
+
+        FleetManagementSystem
+
+            File name used for serialized fleet storage.
+
+            Local variables in main:
+                reads user input from standard input.
+                dynamic list storing the in-memory fleet.
+
+    Methods:
+
+        Function points correspond to methods, getters and setters, toString
+
+        Then:
+
+        Boat
+
+            public Boat
+
+            public void addExpense
+
+        BoatType
+
+            public static BoatType fromString(String s)
+
+        FleetManagementSystem
+
+            Main method
+
+            ArrayList<Boat>
+
+            parseBoatFromCsvLine
+
+            saveToDb
+
+            ArrayList<Boat> loadFromDb()
+
+            printFleetReport
+
+            addBoatFromUser
+
+            removeBoatFromUser
+
+            requestExpense
+
+            findBoatByName

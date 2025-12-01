@@ -11,6 +11,11 @@ public class DentalRecord {
 
     private static int[][] rowLengths;
 
+    /**
+     * 
+     * @param args
+     */
+
     public static void main(String[] args) {
         System.out.println("Welcome to the Floridian Tooth Records");
         System.out.println("--------------------------------------");
@@ -72,6 +77,15 @@ public class DentalRecord {
         }// end of the while loop
     }// end of the main method
 
+    /**
+     *
+     * @param firstPrompt
+     * @param retryPrompt
+     * @param min
+     * @param max
+     * @return
+     */
+
     private static int readIntInRange(String firstPrompt, String retryPrompt, int min, int max) {
         System.out.print(firstPrompt);
         int v = keyboard.nextInt();
@@ -84,6 +98,12 @@ public class DentalRecord {
         return v;
     }// end of the readIntInRange method
 
+    /**
+     *
+     * @param prompt
+     * @return
+     */
+
     private static String readNonEmpty(String prompt) {
         System.out.print(prompt);
         String s = keyboard.nextLine().trim();
@@ -94,6 +114,12 @@ public class DentalRecord {
         return s;
     }// end of the readNonEmpty method
 
+    /**
+     *
+     * @param s
+     * @return
+     */
+
     private static boolean isIBM(String s) {
         int i;
         for (i = 0; i < s.length(); i++) {
@@ -102,6 +128,12 @@ public class DentalRecord {
         }// end of the for loop
         return true;
     }// end of the isIBM method
+
+    /**
+     *
+     * @param firstPrompt
+     * @return
+     */
 
     private static String readTeethRow(String firstPrompt) {
         System.out.print(firstPrompt);
@@ -123,6 +155,12 @@ public class DentalRecord {
         return s;
     }// end of the readTeethRow method
 
+    /**
+     *
+     * @param row
+     * @param s
+     */
+
     private static void loadRow(char[] row, String s) {
         int i;
         for (i = 0; i < MAX_TEETH; i++) {
@@ -133,6 +171,13 @@ public class DentalRecord {
         }// end of the for loop
     }// end of the loadRow method
 
+    /**
+     *
+     * @param firstPrompt
+     * @param retryPrompt
+     * @return
+     */
+
     private static String readMenu(String firstPrompt, String retryPrompt) {
         System.out.print(firstPrompt);
         String s = keyboard.nextLine().trim().toUpperCase();
@@ -142,6 +187,12 @@ public class DentalRecord {
         }// end of the while loop
         return s;
     }// end of the readMenu method
+
+    /**
+     *
+     * @param names
+     * @param teeth
+     */
 
     private static void printFamily(String[] names, char[][][] teeth) {
         System.out.println();
@@ -156,6 +207,12 @@ public class DentalRecord {
         System.out.println();
     }// end of the printFamily method
 
+    /**
+     *
+     * @param row
+     * @param enteredLen
+     */
+
     private static void printRow(char[] row, int enteredLen) {
         if (enteredLen < 1) {
             enteredLen = 1;
@@ -168,6 +225,12 @@ public class DentalRecord {
         }// end of the while loop
         System.out.println();
     }// end of the printRow method
+
+    /**
+     *
+     * @param names
+     * @param teeth
+     */
 
     private static void doExtract(String[] names, char[][][] teeth) {
         int person = -1;
@@ -213,6 +276,13 @@ public class DentalRecord {
         teeth[person][row][idx] = 'M';
     }// end of the doExtract method
 
+    /**
+     *
+     * @param names
+     * @param who
+     * @return
+     */
+
     private static int findPerson(String[] names, String who) {
         int i;
         for (i = 0; i < names.length; i++) {
@@ -221,11 +291,22 @@ public class DentalRecord {
         return -1;
     }// end of the findPerson method
 
+    /**
+     *
+     * @param s
+     * @return
+     */
+
     private static int toRow(String s) {
         if (s.equals("U") || s.equals("UPPER") || s.equals("UPPERS")) return 0;
         if (s.equals("L") || s.equals("LOWER") || s.equals("LOWERS")) return 1;
         return -1;
     }// end of the toRow method
+
+    /**
+     *
+     * @param teeth
+     */
 
     private static void printRoots(char[][][] teeth) {
         int I = 0, B = 0, M = 0;
@@ -270,4 +351,5 @@ public class DentalRecord {
         System.out.printf("One root canal at %8.2f%n", x1);
         System.out.printf("Another root canal at %8.2f%n", x2);
     }// end of the printRoots method
+
 }// end of the DentalRecord class
